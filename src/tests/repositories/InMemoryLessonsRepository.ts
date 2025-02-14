@@ -1,6 +1,6 @@
-import { Lesson } from "../../entities/Lesson"
-import { CreateLessonData, LessonsRepository } from "../../repositories/interfaces/LessonsRepository"
-import crypto from 'node:crypto'
+import { Lesson } from "../../entities/Lesson";
+import { CreateLessonData, LessonsRepository } from "../../repositories/interfaces/LessonsRepository";
+import crypto from 'node:crypto';
 
 /**
  * Representa o repositório (em memória) da lição.
@@ -9,7 +9,7 @@ import crypto from 'node:crypto'
  */
 export class InMemoryLessonsRepository implements LessonsRepository {
 
-    public items: Lesson[] = []
+    public items: Lesson[] = [];
 
     /**
      * Adiciona uma lição na memória.
@@ -21,6 +21,6 @@ export class InMemoryLessonsRepository implements LessonsRepository {
             id: crypto.randomUUID(),
             title: data.title,
             description: data.description ?? null
-        })
+        });
     }
 }

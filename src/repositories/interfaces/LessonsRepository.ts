@@ -14,5 +14,5 @@ export interface CreateLessonData {
  * @interface LessonsRepository
  */
 export interface LessonsRepository {
-  create(data: CreateLessonData): Promise<void>
+  create(data: CreateLessonData): Promise<void>;
 }

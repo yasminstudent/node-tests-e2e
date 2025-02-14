@@ -1,12 +1,13 @@
 import { LessonsRepository } from "../repositories/interfaces/LessonsRepository";
 import { CreateLessonRequest } from "./interfaces/CreateLessonRequest";
+import { CreateLessonService } from "./interfaces/CreateLessonService";
 
 /**
  * Representa o caso de uso: criação de uma lição.
  * 
  * @class CreateLesson
  */
-export class CreateLesson {
+export class CreateLesson implements CreateLessonService {
 
   /**
    * Define o atributo da classe.
@@ -25,7 +26,7 @@ export class CreateLesson {
   async execute({ title, description }: CreateLessonRequest) {
     //Validações
     if (!title) {
-      throw new Error('Title is required.')
+      throw new Error('Title is required.');
     }
 
     //... poderia validar se já existe uma lição com o titulo recebido e entre outras validações ...
@@ -34,7 +35,7 @@ export class CreateLesson {
     await this.lessonsRepository.create({
       title, 
       description
-    })
+    });
 
     //Aqui aplicamos Command/Query Segregation -> Ações de escrita/update/delete não precisam de retorno
     //Por isso não estamos retornando nada nesse método

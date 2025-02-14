@@ -25,10 +25,12 @@ export default class PrismaTestEnvironment extends NodeEnvironment {
     const dbPort = process.env.DATABASE_PORT;
     const dbName = process.env.DATABASE_NAME;
 
+    //Cria um banco de dados (na verdade um schema) diferente para cada teste
     this.schema = `test_${crypto.randomUUID()}`;
-    this.connectionString = `postgresql://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${dbName}?schema=${this.schema}`;
+    this.connectionString = `mysql://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${dbName}?schema=${this.schema}`;
   }
 
+  //executa antes de cada switch de teste, executando as migrations no banco
   async setup() {
     process.env.DATABASE_URL = this.connectionString;
     this.global.process.env.DATABASE_URL = this.connectionString;
@@ -38,6 +40,7 @@ export default class PrismaTestEnvironment extends NodeEnvironment {
     return super.setup();
   }
 
+  //executa depois de cada switch de teste, deletando o schema
   async teardown() {
     const client = new Client({
       connectionString: this.connectionString,

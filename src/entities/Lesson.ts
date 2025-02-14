@@ -5,7 +5,7 @@
  */
 export class Lesson
 {
-    public id: string
-    public title: string
-    public description: string | null 
+    public id: string;
+    public title: string;
+    public description: string | null;
 }
